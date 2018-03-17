@@ -103,7 +103,8 @@
   input[type="password"],
   input[type="email"],
   input[type="date"],
-  input[type="tel"]
+  input[type="tel"],
+  input[type="url"]
   {
     height:30px;
     width:100%;;
@@ -127,7 +128,8 @@
   textarea,
   input[type="text"],
   input[type="password"],
-  input[type="email"] {
+  input[type="email"],
+  input[type="url"] {
     -webkit-appearance: none;
     -moz-appearance: none;
     -ms-appearance: none;
@@ -139,7 +141,8 @@
   textarea:hover,
   input[type="text"]:hover,
   input[type="password"]:hover,
-  input[type="email"]:hover {
+  input[type="email"]:hover,
+  input[type="url"]:hover {
     border-color: rgba(255, 255, 255, 0.5);
     background-color: rgba(0, 0, 0, 0.5);
     color: rgba(255, 255, 255, 0.7);
@@ -148,7 +151,8 @@
   textarea:focus,
   input[type="text"]:focus,
   input[type="password"]:focus,
-  input[type="email"]:focus {
+  input[type="email"]:focus,
+  input[type="url"]:focus {
     border: 2px solid;
     border-color: #1e5f99;
     background-color: rgba(0, 0, 0, 0.5);

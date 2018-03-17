@@ -13,6 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         //set supplier address details
         $product_name =$mysqli->real_escape_string($_POST['product_name']);
+        $product_sku = $mysqli->real_escape_string($_POST['product_sku']);
         $product_costprice =$mysqli->real_escape_string($_POST['product_costprice']);
         $product_sellingprice =$mysqli->real_escape_string($_POST['product_sellingprice']);
         $product_dimensions =$mysqli->real_escape_string($_POST['product_dimensions']);
@@ -35,8 +36,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
                 
                //insert user data into database
-               $sql = "INSERT INTO inventory (product_name,product_costprice,product_sellingprice,product_dimensions,product_weight,product_description,product_colour,product_stock,supplier_supplier_id)
-               VALUES ('$product_name','$product_costprice','$product_sellingprice','$product_dimensions','$product_weight','$product_description','$product_colour','$product_stock','$supplier_id')";
+               $sql = "INSERT INTO inventory (product_name,product_sku,product_costprice,product_sellingprice,product_dimensions,product_weight,product_description,product_colour,product_stock,supplier_supplier_id)
+               VALUES ('$product_name','$product_sku','$product_costprice','$product_sellingprice','$product_dimensions','$product_weight','$product_description','$product_colour','$product_stock','$supplier_id')";
             
                 //if the query is successsful, redirect to welcome.php page, done!
                 if ($mysqli->query($sql) === true){
@@ -60,6 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <input type="email" placeholder="Supplier Email" name="supplier_email" required />
       
       <input type="text" placeholder="Product Name" name="product_name" required />
+      <input type="text" placeholder="Product SKU" name="product_sku" required />
       <input type="text" placeholder="Product Costprice" name="product_costprice" required />
       <input type="text" placeholder="Product Sellingprice" name="product_sellingprice" required />
       <input type="text" placeholder="Product Dimensions" name="product_dimensions" required />

@@ -46,7 +46,7 @@ else {
             <?= $first_name.' '.$last_name ?>
           </button>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Profile</a>
+            <a class="dropdown-item" href="../login/user_profile.php">Profile</a>
             <a class="dropdown-item" href="#">Update Profile</a>
             <a class="dropdown-item" href="#">Change Password</a>
             <div class="dropdown-divider"></div>
@@ -62,7 +62,7 @@ else {
           <nav class="navbar bg-dark" style="padding:0">
               <ul class="navbar-nav">
                 <li class="nav-item active">
-                  <a class="nav-link" href="#">INVENTORY</a>
+                  <a class="nav-link" href="index.php">INVENTORY</a>
                 </li>
                 <hr/>
                 <li class="nav-item">
@@ -88,6 +88,7 @@ else {
             </nav>
         </div>
         <div class="col-9 content">
+            <!-- inventory details -->
             <a href="inventory/insert_product.php" class="btn btn-primary">Insert New Product</a>
               
            
@@ -141,9 +142,54 @@ else {
 
              echo "</tbody>
                   </table>";  
-           ?>
+           
+          ?>
+         
+          <!-- Supplier Details -->
+           <a href="supplier/register.php" class="btn btn-primary">Add New Supplier</a>
+              
+           
+           <?php
+             global $con;
+             $get_supplier = "select * from supplier order by RAND() LIMIT 0,10";
+             $run_supplier = mysqli_query($con , $get_supplier);
+
+             echo "<table class='table'>
+                  <thead>
+                  <tr>
+                    <th>Company Name</th>
+                    <th>Contact Details</th>
+                    <th>Email</th>
+                    <th>URL</th>
+                  </tr>
+                </thead>
+                <tbody>";
+       
+             while($row_supplier = mysqli_fetch_array($run_supplier)){
+
+               $supplier_companyname =$row_supplier['supplier_companyname'];
+               $supplier_contact = $row_supplier['supplier_contact'];
+               $supplier_email =$row_supplier['supplier_email'];
+               $supplier_url =$row_supplier['supplier_url'];
+               
+       
+               echo "
+                  <tr>
+                 <td>$supplier_companyname</td>
+                 <td>$supplier_contact</td>
+                 <td>$supplier_email</td>
+                 <td>$supplier_url</td>
+                 </tr>
+               ";
+             }
+
+             echo "</tbody>
+                  </table>";  
+           
+           ?> 
             
-        </div>
+        </div>  
+
       </div>
 
     </div>

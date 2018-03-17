@@ -61,9 +61,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <form class="form" action="register.php" method="post" enctype="multipart/form-data" autocomplete="off">
       
       <input type="text" placeholder="Supplier Company Name" name="supplier_companyname" required />
-      <input type="number" placeholder="Supplier Contact No." name="supplier_contact" required />
+      <input type="text" placeholder="Supplier Contact No." name="supplier_contact" required />
       <input type="email" placeholder="Supplier Email" name="supplier_email" required />
-      <input type="url" placeholder="Supplier URL" name="supplier_url" required /> 
+      <input type="text" placeholder="Supplier URL" name="supplier_url" required /> 
    
       <h1>Enter Address Details.</h1>
       <input type="text" placeholder="Address line 1" name="address_line1" required /> 
