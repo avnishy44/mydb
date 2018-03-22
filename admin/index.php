@@ -1,10 +1,11 @@
 <?php
+  session_start();
   include("../includes/db.php");
 ?>
 
 <?php
 /* Displays user information and some useful messages */
-session_start();
+
 
 // Check if user is logged in using the session variable
 if ( $_SESSION['logged_in'] != 1 ) {

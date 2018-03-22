@@ -1,14 +1,8 @@
 <?php 
+session_start();
 /* Main page with two forms: sign up and log in */
 require 'db.php';
-session_start();
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Sign-Up/Login Form</title>
-  <?php include 'css/css.html'; ?>
-</head>
 
 <?php 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') 
@@ -26,6 +20,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     }
 }
 ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sign-Up/Login Form</title>
+  <?php include 'css/css.html'; ?>
+</head>
+
+
 <body>
   <div class="form">
       
