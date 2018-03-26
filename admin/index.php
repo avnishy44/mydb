@@ -10,7 +10,7 @@
 // Check if user is logged in using the session variable
 if ( $_SESSION['logged_in'] != 1 ) {
   $_SESSION['message'] = "You must log in before viewing your profile page!";
-  header("location: error.php");    
+  header("location:../login/error.php");    
 }
 else {
     // Makes it easier to read
@@ -67,7 +67,7 @@ else {
                 </li>
                 <hr/>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">NEW ORDER</a>
+                  <a class="nav-link" href="order/index.php">NEW ORDER</a>
                 </li>
                 <hr/>
                 <li class="nav-item">
@@ -75,11 +75,11 @@ else {
                 </li>
                 <hr/>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">PENDING ORDERS/COMPLETED</a>
+                  <a class="nav-link" href="all_orders/index.php">PENDING ORDERS/COMPLETED</a>
                 </li>
                 <hr/>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">MONTH BY MONTH ANALYSIS</a>
+                  <a class="nav-link" href="analysis/index.php">MONTH BY MONTH ANALYSIS</a>
                 </li>
                 <hr/>
                 <li class="nav-item">

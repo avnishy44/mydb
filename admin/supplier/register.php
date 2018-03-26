@@ -1,6 +1,6 @@
 <?php
 
-$mysqli = new mysqli("localhost", "root", "avnishy44", "mydb");
+include("../../includes/db1.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     

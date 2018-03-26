@@ -1,9 +1,10 @@
 <?php
-
-$mysqli = new mysqli("localhost", "root", "avnishy44", "mydb");
+session_start();
+include("../includes/db1.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
+        $_SESSION['customer_email'] = $_POST['customer_email'];
     
         //set all the post variables
         //set supplier details
@@ -42,7 +43,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
                 //if the query is successsful, redirect to welcome.php page, done!
                 if ($mysqli->query($sql) === true){
-                    echo "<div class='alert alert-error'><h1>Registration succesful! Added $customer_firstname to the database!</h1></div>";
+                    if($_SESSION['check_existence'] == 0){
+                        header("Location:http://localhost/mydb/admin/order/new_order.php");
+                    }
+                    echo "<div class='alert alert-error'><h1>Registration succesfull! Added $customer_firstname to the database!</h1></div>";
+                    
                 }
                 else {
                     $sql = "DELETE FROM address WHERE address_code = '$address_code'" ;
@@ -52,6 +57,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $mysqli->close();          
 
             }
+
+            
 }
 ?>
 <link href="//db.onlinewebfonts.com/c/a4e256ed67403c6ad5d43937ed48a77b?family=Core+Sans+N+W01+35+Light" rel="stylesheet" type="text/css"/>
