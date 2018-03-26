@@ -97,7 +97,7 @@ else {
              $run_pro = mysqli_query($con , $get_pro);
              $total_costprice = 0;
              $total_sellingprice = 0;
-             $total_gst =0;
+             $total_gst = 0;
        
              while($row_pro = mysqli_fetch_array($run_pro)){
 
@@ -115,8 +115,8 @@ else {
                             
                     }
 
-                    $total_costprice = $local_product_costprice * $product_quantity;
-                    $total_sellingprice = $local_product_sellingprice * $product_quantity;
+                    $total_costprice += $local_product_costprice * $product_quantity;
+                    $total_sellingprice += $local_product_sellingprice * $product_quantity;
             }     
 
                     $total_gst = 0.18 * $total_costprice;

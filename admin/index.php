@@ -1,6 +1,16 @@
 <?php
   session_start();
   include("../includes/db.php");
+
+  //check for message in session
+  if($_SESSION['message'] !== ''){
+    //echo $_SESSION['message'];
+    $msg = $_SESSION['message'];
+    include("../includes/script.php");
+    alert($msg);
+    $_SESSION['message'] = '';
+
+  }
 ?>
 
 <?php
@@ -89,9 +99,67 @@ else {
             </nav>
         </div>
         <div class="col-9 content">
+            
             <!-- inventory details -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">New product +</button>
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">New Product</h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="inventory/insert_product.php" method="post" enctype="multipart/form-data" autocomplete="off">
+                        <div class="form-group">
+                          <label for="Name">Name:</label>
+                          <input type="text" class="form-control" id="name" placeholder="Enter Name" name="product_name">
+                        </div>
+                        <div class="form-group">
+                          <label for="sku">SKU:</label>
+                          <input type="text" class="form-control" id="sku" placeholder="Enter SKU" name="product_sku">
+                        </div>
+                        <div class="form-group">
+                          <label for="cp">Cost Price:</label>
+                          <input type="text" class="form-control" id="cp" placeholder="Enter cost price" name="product_costprice">
+                        </div>
+                        <div class="form-group">
+                          <label for="sp">Selling Price:</label>
+                          <input type="text" class="form-control" id="sku" placeholder="Enter selling price" name="product_sellingprice">
+                        </div>
+                        <div class="form-group">
+                          <label for="quan">Stock:</label>
+                          <input type="text" class="form-control" id="quan" placeholder="Enter stock" name="product_stock">
+                        </div>
+                        <div class="form-group">
+                          <label for="dimen">Length:</label>
+                          <input type="text" class="form-control" id="dimen" placeholder="Enter length" name="product_length">
+                        </div>
+                        <div class="form-group">
+                          <label for="dimen">Breadth:</label>
+                          <input type="text" class="form-control" id="dimen" placeholder="Enter breadth" name="product_breadth">
+                        </div>
+                        <div class="form-group">
+                          <label for="dimen">Height:</label>
+                          <input type="text" class="form-control" id="dimen" placeholder="Enter height" name="product_height">
+                        </div>
+                        <div class="form-group">
+                          <label for="weight">Weight:</label>
+                          <input type="text" class="form-control" id="weight" placeholder="Enter weight" name="product_weight">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>                      
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>  
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+          
+            <!-- inventory details -->
+          <!--
             <a href="inventory/insert_product.php" class="btn btn-primary">Insert New Product</a>
-              
+          -->    
            
            <?php
              global $con;
@@ -105,10 +173,9 @@ else {
                     <th>SKU</th>
                     <th>Cost Price</th>
                     <th>Selling Price</th>
-                    <th>Dimensions</th>
-                    <th>Weight</th>
-                    <th>Description</th>
-                    <th>Colour</th>
+                    <th>Dimensions <br>(in mm)</th>
+                    <th>Weight <br>(in gram)</th>
+                    <th>Volumetric Weight<br>( mm<sup>3</sup>/5000)</th>
                     <th>Stock</th>
                   </tr>
                 </thead>
@@ -120,10 +187,11 @@ else {
                $product_sku = $row_pro['product_sku'];
                $product_costprice =$row_pro['product_costprice'];
                $product_sellingprice =$row_pro['product_sellingprice'];
-               $product_dimensions =$row_pro['product_dimensions'];
                $product_weight =$row_pro['product_weight'];
-               $product_description =$row_pro['product_description'];
-               $product_colour =$row_pro['product_colour'];
+               $product_length =$row_pro['product_length'];
+               $product_breadth =$row_pro['product_breadth'];
+               $product_height =$row_pro['product_height'];      
+               $product_volume =$row_pro['product_volume'];         
                $product_stock =$row_pro['product_stock'];
        
                echo "
@@ -132,10 +200,9 @@ else {
                  <td>$product_sku</td>
                  <td>$product_costprice</td>
                  <td>$product_sellingprice</td>
-                 <td>$product_dimensions</td>
+                 <td>$product_length&lowast;$product_breadth&lowast;$product_height</td>
                  <td>$product_weight</td>
-                 <td>$product_description</td>
-                 <td>$product_colour</td>
+                 <td>$product_volume</td>
                  <td>$product_stock</td>
                  </tr>
                ";
@@ -146,6 +213,8 @@ else {
            
           ?>
          
+         <?php 
+         /*
           <!-- Supplier Details -->
            <a href="supplier/register.php" class="btn btn-primary">Add New Supplier</a>
               
@@ -189,6 +258,8 @@ else {
            
            ?> 
             
+           */
+          ?>
         </div>  
 
       </div>

@@ -17,7 +17,7 @@ else {
 ?>
 <?php
  
-$mysqli = new mysqli("localhost", "root", "avnishy44", "mydb");
+include("../../includes/db1.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
@@ -35,6 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         $tracking_link = "http://localhost/mydb/admin/order/order_status.php?token=$order_timestamp";
 
+    /*
         $selection1 = "SELECT * FROM supplier WHERE supplier_companyname='$supplier_companyname'";
         $run_selection1 = mysqli_query($mysqli , $selection1);
                 
@@ -44,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 };
                 
                 $count1 = mysqli_num_rows($run_selection1);
-
+    */
         $selection2 = "SELECT * FROM inventory WHERE product_sku='$product_sku'";
         $run_selection2 = mysqli_query($mysqli , $selection2);
                 
@@ -73,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
                 if($count3 >0){
 
-                    if($count1 >0){
+                //   if($count1 >0){
 
                     //insert user data into database
                     $sql = "INSERT INTO orders (order_id,product_quantity,shipping_company,tracking_link,order_status,order_timestamp,customer_customer_id,inventory_product_id)
@@ -87,6 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             echo "<div class='alert alert-error'><h1>Order could not be placed ! $mysqli->error</h1></div>";
                         }
 
+                    /*
                         $selection = "SELECT * FROM orders WHERE order_timestamp='$order_timestamp'";
                         $run_selection = mysqli_query($mysqli , $selection);
                                 
@@ -108,10 +110,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         else {
                             echo "<div class='alert alert-error'><h1>Shipper could not be decided ! $mysqli->error</h1></div>";
                         }
+                    */
                         $mysqli->close();                 
-                    }
+                //    }
+                }else{
+                    echo "<div class='alert alert-error'><h1>Customer doesn't exists !</h1></div>";
                 }
+            }else{
+                echo "<div class='alert alert-error'><h1>Product doesn't exists !</h1></div>";
             }
+            
 }
 ?>
 <link href="//db.onlinewebfonts.com/c/a4e256ed67403c6ad5d43937ed48a77b?family=Core+Sans+N+W01+35+Light" rel="stylesheet" type="text/css"/>
@@ -121,7 +129,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <h1>Create New Order</h1>
     <form class="form" action="new_order.php" method="post" enctype="multipart/form-data" autocomplete="off">
       
-      <input type="text" placeholder="Supplier Company Name" name="supplier_companyname" required />
+      <input type="text" placeholder="Shipper Company Name" name="supplier_companyname" required />
       
       <input type="text" placeholder="Product SKU" name="product_sku"  required />
       <input type="text" placeholder="Product Quantity" name="product_quantity"  required />
