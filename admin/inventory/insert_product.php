@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
        
         //set supplier address details
         $product_name =$mysqli->real_escape_string($_POST['product_name']);
-        $product_sku = $mysqli->real_escape_string($_POST['product_sku']);
+        $product_sku = md5($product_name);
         $product_costprice =$mysqli->real_escape_string($_POST['product_costprice']);
         $product_sellingprice =$mysqli->real_escape_string($_POST['product_sellingprice']);
         //$product_dimensions =$mysqli->real_escape_string($_POST['product_dimensions']);

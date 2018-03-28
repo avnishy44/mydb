@@ -51,9 +51,13 @@ else { // Email doesn't already exist in a database, proceed...
 
         Please click this link to activate your account:
 
-        http://localhost/login/verify.php?email='.$email.'&hash='.$hash;  
+        http://snappysanta.cf/mydb/login/verify.php?email='.$email.'&hash='.$hash;  
 
-        mail( $to, $subject, $message_body );
+        $headers = 'From: info@snappysanta.com' . "\r\n" .
+                'Reply-To: webmaster@snappysanta.com' . "\r\n" .
+                'X-Mailer: PHP/' . phpversion();
+
+        mail( $to, $subject, $message_body, $headers );
 
         header("location: profile.php"); 
 

@@ -3,7 +3,6 @@ session_start();
 /* Main page with two forms: sign up and log in */
 require 'db.php';
 ?>
-
 <?php 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') 
 {

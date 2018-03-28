@@ -2,7 +2,6 @@
   session_start();
   include("../../includes/db.php");
 ?>
-
 <?php
 /* Displays user information and some useful messages */
 
@@ -62,7 +61,7 @@ else {
         <div class="col-3 sidenav">
           <nav class="navbar bg-dark" style="padding:0">
               <ul class="navbar-nav">
-                <li class="nav-item active">
+                <li class="nav-item ">
                   <a class="nav-link" href="../index.php">INVENTORY</a>
                 </li>
                 <hr/>
@@ -74,7 +73,7 @@ else {
                   <a class="nav-link" href="../customer/customer.php">CUSTOMER DETAILS</a>
                 </li>
                 <hr/>
-                <li class="nav-item">
+                <li class="nav-item active">
                   <a class="nav-link" href="index.php">PENDING ORDERS/COMPLETED</a>
                 </li>
                 <hr/>

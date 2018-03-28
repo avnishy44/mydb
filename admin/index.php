@@ -3,6 +3,7 @@
   include("../includes/db.php");
 
   //check for message in session
+  if(isset($_SESSION['message'])){
   if($_SESSION['message'] !== ''){
     //echo $_SESSION['message'];
     $msg = $_SESSION['message'];
@@ -10,7 +11,7 @@
     alert($msg);
     $_SESSION['message'] = '';
 
-  }
+  }}
 ?>
 
 <?php
@@ -59,7 +60,7 @@ else {
           <div class="dropdown-menu">
             <a class="dropdown-item" href="../login/user_profile.php">Profile</a>
             <a class="dropdown-item" href="#">Update Profile</a>
-            <a class="dropdown-item" href="#">Change Password</a>
+            <a class="dropdown-item" href="../login/forgot.php">Change Password</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="../login/logout.php">Log Out</a>
           </div>
@@ -101,54 +102,53 @@ else {
         <div class="col-9 content">
             
             <!-- inventory details -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">New product +</button>
-            <div class="modal fade" id="myModal">
-                <div class="modal-dialog modal-dialog-centered modal-lg">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h4 class="modal-title">New Product</h4>
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type='button' class='btn btn-primary' data-toggle='modal' data-target='#myModal'>New product +</button>
+            <div class='modal fade' id='myModal'>
+                <div class='modal-dialog modal-dialog-centered modal-lg'>
+                  <div class='modal-content'>
+                    <div class='modal-header'>
+                      <h4 class='modal-title'>New Product</h4>
+                      <button type='button' class='close' data-dismiss='modal'>&times;</button>
                     </div>
-                    <div class="modal-body">
-                      <form action="inventory/insert_product.php" method="post" enctype="multipart/form-data" autocomplete="off">
-                        <div class="form-group">
-                          <label for="Name">Name:</label>
-                          <input type="text" class="form-control" id="name" placeholder="Enter Name" name="product_name">
+                    <div class='modal-body'>
+                      <form action='inventory/insert_product.php' method='post' enctype='multipart/form-data' autocomplete='off'>
+                        <div class='form-group'>
+                          <label for='Name'>Name:</label>
+                          <input type='text' class='form-control' id='name' placeholder='Enter Name' name='product_name'>
                         </div>
-                        <div class="form-group">
-                          <label for="sku">SKU:</label>
-                          <input type="text" class="form-control" id="sku" placeholder="Enter SKU" name="product_sku">
+                        <div class='form-group'>
+                          <label for='cp'>Cost Price:</label>
+                          <input type='text' class='form-control' id='cp' placeholder='Enter cost price (in Rupee)' name='product_costprice'>
                         </div>
-                        <div class="form-group">
-                          <label for="cp">Cost Price:</label>
-                          <input type="text" class="form-control" id="cp" placeholder="Enter cost price" name="product_costprice">
+                        <div class='form-group'>
+                          <input type='hidden' class='form-control' id='sku' value=$product_sku name='product_costprice'>
                         </div>
-                        <div class="form-group">
-                          <label for="sp">Selling Price:</label>
-                          <input type="text" class="form-control" id="sku" placeholder="Enter selling price" name="product_sellingprice">
+                        <div class='form-group'>
+                          <label for='sp'>Selling Price:</label>
+                          <input type='text' class='form-control' id='sp' placeholder='Enter selling price (in Rupee)'  name='product_sellingprice'>
                         </div>
-                        <div class="form-group">
-                          <label for="quan">Stock:</label>
-                          <input type="text" class="form-control" id="quan" placeholder="Enter stock" name="product_stock">
+                        <div class='form-group'>
+                          <label for='quan'>Stock:</label>
+                          <input type='text' class='form-control' id='quan' placeholder='Enter stock' name='product_stock'>
                         </div>
-                        <div class="form-group">
-                          <label for="dimen">Length:</label>
-                          <input type="text" class="form-control" id="dimen" placeholder="Enter length" name="product_length">
+                        <div class='form-group'>
+                          <label for='dimen'>Length:</label>
+                          <input type='text' class='form-control' id='dimen' placeholder='Enter length (in cm)' name='product_length'>
                         </div>
-                        <div class="form-group">
-                          <label for="dimen">Breadth:</label>
-                          <input type="text" class="form-control" id="dimen" placeholder="Enter breadth" name="product_breadth">
+                        <div class='form-group'>
+                          <label for='dimen'>Breadth:</label>
+                          <input type='text' class='form-control' id='dimen' placeholder='Enter breadth (in cm)' name='product_breadth'>
                         </div>
-                        <div class="form-group">
-                          <label for="dimen">Height:</label>
-                          <input type="text" class="form-control" id="dimen" placeholder="Enter height" name="product_height">
+                        <div class='form-group'>
+                          <label for='dimen'>Height:</label>
+                          <input type='text' class='form-control' id='dimen' placeholder='Enter height (in cm)' name='product_height'>
                         </div>
-                        <div class="form-group">
-                          <label for="weight">Weight:</label>
-                          <input type="text" class="form-control" id="weight" placeholder="Enter weight" name="product_weight">
+                        <div class='form-group'>
+                          <label for='weight'>Weight:</label>
+                          <input type='text' class='form-control' id='weight' placeholder='Enter weight (in grams)' name='product_weight'>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>                      
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>  
+                        <button type='submit' class='btn btn-primary'>Submit</button>                      
+                        <button type='button' class='btn btn-danger' data-dismiss='modal'>Close</button>  
                       </form>
                     </div>
                   </div>
@@ -171,12 +171,13 @@ else {
                   <tr>
                     <th>Product Name</th>
                     <th>SKU</th>
-                    <th>Cost Price</th>
-                    <th>Selling Price</th>
-                    <th>Dimensions <br>(in mm)</th>
+                    <th>Cost Price <br> (in Rupees) </br></th>
+                    <th>Selling Price <br> (in Rupees) </br></th>
+                    <th>Dimensions <br>(in cm)</th>
                     <th>Weight <br>(in gram)</th>
-                    <th>Volumetric Weight<br>( mm<sup>3</sup>/5000)</th>
+                    <th>Volumetric Weight<br>( cm<sup>3</sup>/5000)</th>
                     <th>Stock</th>
+                    <th>Edit</th>
                   </tr>
                 </thead>
                 <tbody>";
@@ -193,6 +194,8 @@ else {
                $product_height =$row_pro['product_height'];      
                $product_volume =$row_pro['product_volume'];         
                $product_stock =$row_pro['product_stock'];
+               
+              //  $modal= modal($product_sku);
        
                echo "
                   <tr>
@@ -204,6 +207,7 @@ else {
                  <td>$product_weight</td>
                  <td>$product_volume</td>
                  <td>$product_stock</td>
+                 <td>".modal($row_pro['product_sku'])."</td>
                  </tr>
                ";
              }
@@ -267,3 +271,62 @@ else {
     </div>
   </body>
 </html>
+
+
+<?php
+  function modal($variable){
+    return "
+    <button type='button' class='btn btn-primary' data-toggle='modal' data-target='#editModal'>Edit</button>
+               <div class='modal fade' id='editModal'>
+                   <div class='modal-dialog modal-dialog-centered modal-lg'>
+                     <div class='modal-content'>
+                       <div class='modal-header'>
+                         <h4 class='modal-title'>Edit Product</h4>
+                         <button type='button' class='close' data-dismiss='modal'>&times;</button>
+                       </div>
+                       <div class='modal-body'>
+                         <form action='inventory/insert_product.php' method='post' enctype='multipart/form-data' autocomplete='off'>
+                           <div class='form-group'>
+                             <label for='Name'>Name:</label>
+                             <input type='text' class='form-control' id='name' name='product_name'>
+                           </div>
+                           <div class='form-group'>
+                             <label for='cp'>Cost Price:</label>
+                             <input type='text' class='form-control' id='cp' placeholder='Enter cost price (in Rupee)' name='product_costprice'>
+                           </div>
+                           <div class='form-group'>
+                             <input type='text' class='form-control'  value='$variable' name='product_costprice'>
+                           </div>
+                           <div class='form-group'>
+                             <label for='sp'>Selling Price:</label>
+                             <input type='text' class='form-control' id='sp' placeholder='Enter selling price (in Rupee)'  name='product_sellingprice'>
+                           </div>
+                           <div class='form-group'>
+                             <label for='quan'>Stock:</label>
+                             <input type='text' class='form-control' id='quan' placeholder='Enter stock' name='product_stock'>
+                           </div>
+                           <div class='form-group'>
+                             <label for='dimen'>Length:</label>
+                             <input type='text' class='form-control' id='dimen' placeholder='Enter length (in cm)' name='product_length'>
+                           </div>
+                           <div class='form-group'>
+                             <label for='dimen'>Breadth:</label>
+                             <input type='text' class='form-control' id='dimen' placeholder='Enter breadth (in cm)' name='product_breadth'>
+                           </div>
+                           <div class='form-group'>
+                             <label for='dimen'>Height:</label>
+                             <input type='text' class='form-control' id='dimen' placeholder='Enter height (in cm)' name='product_height'>
+                           </div>
+                           <div class='form-group'>
+                             <label for='weight'>Weight:</label>
+                             <input type='text' class='form-control' id='weight' placeholder='Enter weight (in grams)' name='product_weight'>
+                           </div>
+                           <button type='submit' class='btn btn-primary'>Submit</button>                      
+                           <button type='button' class='btn btn-danger' data-dismiss='modal'>Close</button>  
+                         </form>
+                       </div>
+                     </div>
+                   </div>
+    ";
+  }
+?>
