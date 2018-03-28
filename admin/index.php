@@ -100,8 +100,109 @@ else {
             </nav>
         </div>
         <div class="col-9 content">
+
+        
+           
+           <form action="index.php" method="POST" class="form-inline">
+         
+         <div class="col-6 col-form-label">
+           <h3><label for="search">Enter product name:</label></h3>
+         </div>
+         
+         <div class="col-4">
+           <input type="text" name="search" class="form-control" placeholder="Enter details here">
+         </div>
+         
+         <div class="col-2">
+           <input type="submit" class="btn btn-primary" name="submit" value="Submit">
+         </div>
+         
+       </form>
+
+       <div class="col-9 ">
+           <hr>
+         </div>
+   
+   <?php
+         if(isset($_POST['search'])){
+           
+           $search = $_POST['search'];
+             
+                 //Email is valid
+                global $con;
+                $get_p = "select * from inventory where product_name='$search'";
+                $run_p = mysqli_query($con , $get_p);
+   
+                $count_customer = mysqli_num_rows($run_p);
+   
+               if($count_customer == 0){
+   
+                 echo "<div class='container'><h2>There is no product with name $search!</h2></div>";
+   
+               }
+               else{
+                 echo "
+                   
+                   <table class='table'>
+                     <thead>
+                     <tr>
+                     <th>Product Name</th>
+                     <th>SKU</th>
+                     <th>Cost Price <br> (in Rupees) </br></th>
+                     <th>Selling Price <br> (in Rupees) </br></th>
+                     <th>Dimensions <br>(in cm)</th>
+                     <th>Weight <br>(in gram)</th>
+                     <th>Volumetric Weight<br>( cm<sup>3</sup>/5000)</th>
+                     <th>Stock</th>
+                     <th>Edit</th>
+                   </tr>
+                   </thead>
+                   <tbody>";
+                 while($row_pro = mysqli_fetch_array($run_p)){
+   
+                  $product_name =$row_pro['product_name'];
+                  $product_sku = $row_pro['product_sku'];
+                  $product_costprice =$row_pro['product_costprice'];
+                  $product_sellingprice =$row_pro['product_sellingprice'];
+                  $product_weight =$row_pro['product_weight'];
+                  $product_length =$row_pro['product_length'];
+                  $product_breadth =$row_pro['product_breadth'];
+                  $product_height =$row_pro['product_height'];      
+                  $product_volume =$row_pro['product_volume'];         
+                  $product_stock =$row_pro['product_stock'];
+   
+                   
+                  
+                  
+          
+                  echo "
+                  <tr>
+                 <td>$product_name</td>
+                 <td>$product_sku</td>
+                 <td>$product_costprice</td>
+                 <td>$product_sellingprice</td>
+                 <td>$product_length&lowast;$product_breadth&lowast;$product_height</td>
+                 <td>$product_weight</td>
+                 <td>$product_volume</td>
+                 <td>$product_stock</td>
+                 <td><a href='inventory/edit_details.php?sku=$product_sku'>Edit</a></td>
+                 </tr>
+                  ";
+                }
+   
+                echo "</tbody>
+                     </table>
+                     </div>";  
+                 }
+
+                }
+
+            ?>
+               </div>
+        
             
             <!-- inventory details -->
+            <div class="col-9 content">
             <button type='button' class='btn btn-primary' data-toggle='modal' data-target='#myModal'>New product +</button>
             <div class='modal fade' id='myModal'>
                 <div class='modal-dialog modal-dialog-centered modal-lg'>
@@ -207,7 +308,7 @@ else {
                  <td>$product_weight</td>
                  <td>$product_volume</td>
                  <td>$product_stock</td>
-                 <td>".modal($row_pro['product_sku'])."</td>
+                 <td><a href='inventory/edit_details.php?sku=$product_sku'>Edit</a></td>
                  </tr>
                ";
              }
