@@ -274,6 +274,88 @@ else {
            }
 
           }
+
+
+          //display 10 random data
+          global $con;
+          $get_customer = "select * from customer order by RAND() LIMIT 0,10";
+          $run_customer = mysqli_query($con , $get_customer);
+          
+          $count_customer = mysqli_num_rows($run_customer);
+
+         if($count_customer == 0){
+
+           echo "<div class='container'><h2>There are no customers yet</h2></div>";
+
+         }
+         else{
+           echo "
+             <div class='container'>
+             <h1>All Customers :</h1>
+             <br>
+             <table class='table'>
+               <thead>
+               <tr>
+                 <th>First Name</th>
+                 <th>Last Name</th>
+                 <th>Email Address</th>
+                 <th>Contact No.</th>
+                 <th>Date Of Birth</th>
+                 <th>Address</th>
+               </tr>
+             </thead>
+             <tbody>";
+           while($row_customer = mysqli_fetch_array($run_customer)){
+
+             $customer_firstname = $row_customer['customer_firstname'];
+             $customer_lastname = $row_customer['customer_lastname'];
+             $customer_email = $row_customer['customer_email'];
+             $customer_contact = $row_customer['customer_contact'];
+             $customer_dob = $row_customer['customer_dob'];
+             $address_address_id = $row_customer['address_address_id'];
+
+             
+             $selection = "SELECT * FROM address WHERE address_id='$address_address_id'";
+             $run_selection = mysqli_query($con , $selection);
+
+                 $address_line1 = '';
+                 $address_line2 = '';
+                 $address_city = '';
+                 $address_state = '';
+                 $address_pincode = '';
+                 $address_landmark = '';
+             
+             while($row_add = mysqli_fetch_array($run_selection)){
+
+                 $address_line1 = $row_add['address_line1'];
+                 $address_line2 = $row_add['address_line2'];
+                 $address_city = $row_add['address_city'];
+                 $address_state = $row_add['address_state'];
+                 $address_pincode = $row_add['address_pincode'];
+                 $address_landmark = $row_add['address_landmark'];
+
+             }
+            
+    
+            echo "
+               <tr>
+                 <td>$customer_firstname</td>
+                 <td>$customer_lastname</td>
+                 <td>$customer_email</td>
+                 <td>$customer_contact</td>
+                 <td>$customer_dob</td>
+                 <td>$address_line1 $address_line2 , $address_landmark <br> $address_city, $address_state, $address_pincode</td>
+              </tr>
+            ";
+          }
+
+          echo "</tbody>
+               </table>
+               </div>";  
+           
+         }
+
+
         ?>
             
         </div>  

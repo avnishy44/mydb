@@ -156,7 +156,7 @@ else {
            
            <?php
              global $con;
-             $get_pro = "select * from orders where order_status='completed'";
+             $get_pro = "select * from orders where order_status='complete'";
              $run_pro = mysqli_query($con , $get_pro);
 
              echo "<table class='table'>

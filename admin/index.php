@@ -13,7 +13,6 @@
 
   }}
 ?>
-
 <?php
 /* Displays user information and some useful messages */
 
@@ -192,17 +191,18 @@ else {
    
                 echo "</tbody>
                      </table>
-                     </div>";  
+                     </div>
+                     ";  
                  }
 
                 }
 
             ?>
-               </div>
+              
         
             
             <!-- inventory details -->
-            <div class="col-9 content">
+            
             <button type='button' class='btn btn-primary' data-toggle='modal' data-target='#myModal'>New product +</button>
             <div class='modal fade' id='myModal'>
                 <div class='modal-dialog modal-dialog-centered modal-lg'>
@@ -372,8 +372,6 @@ else {
     </div>
   </body>
 </html>
-
-
 <?php
   function modal($variable){
     return "
